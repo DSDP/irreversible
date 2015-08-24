@@ -1,0 +1,81 @@
+
+<div class="simple-entries">
+  <div class="page-header">
+  <h4>
+      {{#link-to 'red.index'}}
+      <span>Novedades</span>
+      {{/link-to}}
+
+
+      {{#link-to 'red.groups.index'}}
+      <span>Grupos</span>
+      {{/link-to}}
+      {{#link-to 'red.events.index'}}
+      <span>Eventos</span>
+      {{/link-to}}
+    </h4>
+  </div>
+  <div class="entry-list -groups">
+    {{#if model.length}}
+      <div class="section-header">
+        <h1 class="invisible">Grupos</h1>
+        {{link-to "Nuevo grupo" "red.groups.new" classNames="btn" }}
+      </div>
+
+      <div class="section-content">
+            {{#each group in model}}
+
+              <div class="entry-item ">
+                <figure class="entry-avatar">
+                  {{#if group.avatar.url}}
+                    <div class="img-container">
+                      <img {{bind-attr src="group.avatar.url"}}/>
+                    </div>
+                    {{else}}
+                    <div class="img-container -no-user">
+                      <img src="assets/images/logo-irreversible.svg">
+                    </div>
+                  {{/if}}
+                </figure>
+                <div class="entry-content">
+                <h3 class="entry-title">
+                      {{group.name}} <br>
+                      <small>Administrador: {{group.owner.fullName}}</small>
+                  </h3>
+                  <p class="entry-message">{{group.description}}</p>
+                  <div class="entry-action">
+                  {{#if (can 'edit group' group)}}
+                     {{#link-to "red.groups.edit" group}}
+                      {{fa-icon "pencil"}}
+                      Editar
+                    {{/link-to}}
+                  {{/if}}
+
+                  {{#link-to "red.groups.show" group}}
+                    {{fa-icon "eye"}}
+                    Ver más
+                  {{/link-to}}
+                  
+                  {{#if (can 'delete group' group)}}
+                    <a href="#" {{action "remove" group}}>
+                      {{fa-icon "trash-o"}} Eliminar
+                    </a>
+                  {{/if}}
+                </div>
+                </div>
+                
+                
+              </div>
+            {{/each}}
+      </div>
+      {{else}}
+        <div class="no-content -groups">
+          <h2>{{fa-icon "users"}}</h2>
+          <p>No tiene grupos</p> <br>
+           {{link-to "Nuevo grupo" "red.groups.new" classNames="btn" }}
+        </div>
+      {{/if}}
+  </div>
+</div>
+
+

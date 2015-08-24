@@ -1,0 +1,312 @@
+{{#if session.isAuthenticated}}
+	<nav {{bind-attr class=":change-app-container isShowApps:is-visible"}}>
+		<ul>
+			<li {{bind-attr class="isHome:active"}}>
+				{{#link-to 'index'}} 
+					{{fa-icon "home"}}
+					<span>Inicio</span>
+				{{/link-to}}
+			</li>		
+			{{#if (can 'view red')}}
+			<li {{bind-attr class="isRed:active"}}>
+				{{#link-to 'red.index'}} 
+					{{fa-icon "share-alt"}}
+					<span>Red</span>
+				{{/link-to}}
+				
+			</li>
+			{{/if}}
+			{{#if (can 'view municipability')}}
+
+			<li {{bind-attr class="isData:active"}}>
+				{{#link-to 'municipabilities.index'}} 
+					{{fa-icon "map-marker"}}
+					<span>Datos</span>
+				{{/link-to}}
+			</li>
+			{{/if}}
+
+			{{#if (can 'view aval')}}
+
+			<li {{bind-attr class="isAvales:active"}}>
+				{{#link-to 'avales.index'}} 
+					{{fa-icon "archive"}}
+					<span>Avales</span>
+				{{/link-to}}
+			</li>
+			{{/if}}			
+
+			{{#if (can 'view calendar')}}
+			<li {{bind-attr class="isCalendar:active"}} >
+				{{#link-to 'calendar.index'}} 
+					{{fa-icon "calendar"}}
+					<span>Calendario</span>
+				{{/link-to}}
+			</li>
+			{{/if}}
+
+			{{#if (can 'view admin')}}
+			<li {{bind-attr class="isAdmin:active"}} >
+				{{#link-to 'admin.users.index'}} 
+					{{fa-icon "wrench"}}
+					<span>Administración</span>
+				{{/link-to}}
+			</li>
+			{{/if}}
+			{{#if (can 'view data-entry')}}
+			<li {{bind-attr class="isDataEntry:active"}} >
+				{{#link-to 'data-entry.municipabilities.people.index'}} 
+					{{fa-icon "user-plus"}}
+					<span>Manejo de datos</span>
+				{{/link-to}}
+			</li>
+			{{/if}}
+		</ul>
+	</nav> <!-- .change-app-container -->
+
+
+	<header {{bind-attr class="isShowApps:is-visible isHome:-red isData:-data isAvales:-data isDataEntry:-admin isRed:-red isCalendar:-calendar isAdmin:-admin isBalancer:-balancer"}}>
+		{{#if isHome}}
+			<button class="logo" {{action 'toggleApps' target="view"}}>
+				<img src="assets/images/logo-irreversible.svg">
+			</button>
+		{{/if}}
+		
+		{{#if isRed}}
+			
+			<button class="logo" {{action 'toggleApps' target="view"}}>
+				<img src="assets/images/logo-irreversible.svg">
+			</button>
+			
+			
+			{{#link-to 'red.index'}}
+				<h3>Red</h3>
+			{{/link-to}}
+			
+			
+
+			<button {{bind-attr class=":menu-button :cbutton :cbutton--effect-nikola isShowClick:cbutton--click"}} {{action 'toggleMenu' target="view"}}>
+				{{fa-icon "bars"}}
+				{{#if session.isAuthenticated}}
+					{{#if isRed}}
+						{{#if session.user.requestFriendsRecibe}}
+							<span class="menu-notification badge badge-notice">{{session.user.requestFriendsRecibe.length}}</span>
+						{{/if}}
+					{{/if}}
+				{{/if}}
+			</button>
+
+
+			{{#if canPublish}}
+				<button {{bind-attr class=":search-button :cbutton :cbutton--effect-nikola isShowPublish:cbutton--click"}} {{action 'togglePublish' target="view"}}>
+					{{fa-icon "comment"}}
+				</button>
+				{{else}}
+				<button {{bind-attr class=":search-button :cbutton :cbutton--effect-nikola isShowPublish:cbutton--click"}} disabled>
+					{{fa-icon "comment"}}
+				</button>
+			{{/if}}
+		{{/if}}
+
+		{{#if isCalendar}}
+			<button class="logo" {{action 'toggleApps' target="view"}}>
+				<img src="assets/images/logo-irreversible.svg">
+			</button>
+			<h3>Calendario</h3>
+		{{/if}}
+
+		{{#if isData}}
+			<button class="logo" {{action 'toggleApps' target="view"}}>
+				<img src="assets/images/logo-irreversible.svg">
+			</button>
+		{{/if}}
+
+		{{#if isAvales}}
+			<button class="logo" {{action 'toggleApps' target="view"}}>
+				<img src="assets/images/logo-irreversible.svg">
+			</button>
+		{{/if}}
+
+
+		{{#if isAdmin}}
+			<button class="logo" {{action 'toggleApps' target="view"}}>
+				<img src="assets/images/logo-irreversible.svg">
+			</button>
+			<h3>Administración</h3>
+			<button {{bind-attr class=":menu-button :cbutton :cbutton--effect-nikola isShowClick:cbutton--click"}} {{action 'toggleMenu' target="view"}}>
+				{{fa-icon "bars"}}
+				{{#if session.isAuthenticated}}
+					{{#if isRed}}
+					{{#if session.user.requestFriendsRecibe}}
+						<span class="menu-notification badge badge-notice">{{session.user.requestFriendsRecibe.length}}</span>
+					{{/if}}
+					{{/if}}
+				{{/if}}
+			</button>
+		{{/if}}
+
+		{{#if isDataEntry}}
+			<button class="logo" {{action 'toggleApps' target="view"}}>
+				<img src="assets/images/logo-irreversible.svg">
+			</button>
+			<h3>Manejo de datos</h3>
+			<button {{bind-attr class=":menu-button :cbutton :cbutton--effect-nikola isShowClick:cbutton--click"}} {{action 'toggleMenu' target="view"}}>
+				{{fa-icon "bars"}}
+			</button>
+		{{/if}}
+
+		{{#if isShowApps}}
+			<a class="log-out" {{ action 'invalidateSession' }}>
+				Cerrar sesión {{fa-icon "sign-out"}}
+			</a>
+		{{/if}}	
+
+		{{#if isBalancer}}
+			<button class="logo" {{action 'toggleApps' target="view"}}>
+				<img src="assets/images/logo-irreversible.svg">
+			</button>
+			<h3>Balanza mágica</h3>
+		{{/if}}	
+	</header>
+
+
+	<div {{bind-attr class=":menu-wrap isShowMenu:show isData:-data isDataEntry:-admin isRed:-red isCalendar:-calendar isAdmin:-admin"}}> 
+		<ul class="menu-nav fa-ul">
+
+			{{#if session.isAuthenticated}}
+				{{#if isRed}}
+				<li>
+					{{#link-to 'red.profile.index'}}
+						{{fa-icon "user"}}
+						<span>Mi perfil</span>
+						
+					{{/link-to}}
+					{{#link-to 'red.profile.edit' classNames="menu-nav-btn"}}{{fa-icon "cog"}}{{/link-to}}
+				</li>
+				<li>
+					{{#link-to 'red.friend-requests'}}
+						{{fa-icon "bell"}}
+						<span>Notificaciones</span>
+						{{#if session.user.requestFriendsRecibe}}
+					<span class="badge badge-notice">{{session.user.requestFriendsRecibe.length}}</span>
+					{{/if}}
+					{{/link-to}}
+				</li>
+				<li>
+					{{#link-to 'red.index'}}
+						{{fa-icon "home"}}
+						<span>Novedades</span>
+					{{/link-to}}
+				</li>
+				<li>
+					{{#link-to 'red.groups.index'}}
+						{{fa-icon "comments"}}
+						<span>Grupos</span>
+					{{/link-to}}
+				</li>
+				<li>
+					{{#link-to 'red.events.index'}}
+						{{fa-icon "calendar"}}
+						<span>Eventos</span>
+					{{/link-to}}
+				</li>				
+				<li>
+					{{#link-to 'red.favorites'}}
+						{{fa-icon "star"}}
+						<span>Favoritos</span>
+					{{/link-to}}
+				</li>
+				{{/if}}	
+				{{#if isAdmin}}
+					{{#if (can 'view admin')}}
+					<li>
+					{{#link-to 'admin.users.index'}} {{fa-icon "user"}} <span>Usuarios</span> {{/link-to}}
+					</li>
+					<li>
+					{{#link-to 'admin.roles.index'}} {{fa-icon "sliders"}} <span>Roles</span> {{/link-to}}
+					</li>
+					{{/if}}
+				{{/if}}	
+				{{#if isDataEntry}}
+					{{#simple-accordion title="Datos electorales"}}
+					<li>
+					{{#link-to 'data-entry.festa.schools.index'}} {{fa-icon "user"}} <span>Escuelas</span> {{/link-to}}
+					</li>					
+					<li>
+					{{#link-to 'data-entry.municipabilities.people.index'}} {{fa-icon "user"}} <span>Personas</span> {{/link-to}}
+					</li>
+					<li>
+					{{#link-to 'data-entry.municipabilities.political-parties.index'}} {{fa-icon "user"}} <span>Partidos politicos</span> {{/link-to}}
+					</li>
+					<li>
+					{{#link-to 'data-entry.municipabilities.political-spaces.index'}} {{fa-icon "user"}} <span>Espacios politicos</span> {{/link-to}}
+					</li>
+					<li>
+					{{#link-to 'data-entry.municipabilities.charges.index'}} {{fa-icon "user"}} <span>Cargos</span> {{/link-to}}
+					</li>					
+					<li>
+					{{#link-to 'data-entry.municipabilities.candidates.index'}} {{fa-icon "sliders"}} <span>Candidatos</span> {{/link-to}}
+					</li>
+					<li>
+					{{#link-to 'data-entry.municipabilities.functionaries.index'}} {{fa-icon "glass"}} <span>Funcionarios</span> {{/link-to}}
+					</li>
+					<li>
+					{{#link-to 'data-entry.municipabilities.electoral-elections.index'}} {{fa-icon "glass"}} <span>Datos electorales</span> {{/link-to}}
+					</li>
+					<li>
+					{{#link-to 'data-entry.municipabilities.electoral-events.index'}} {{fa-icon "glass"}} <span>Eventos</span> {{/link-to}}
+					</li>
+
+					{{/simple-accordion}}
+
+					{{#simple-accordion title="Datos de Avales"}}
+					<li>
+					{{#link-to 'data-entry.avales.aval-operators.index'}} {{fa-icon "glass"}} <span>Operadores</span> {{/link-to}}
+					</li>					
+
+					<li>
+					{{#link-to 'data-entry.avales.electoral-lines.index'}} {{fa-icon "glass"}} <span>Lineas</span> {{/link-to}}
+					</li>					
+					<li>
+					{{#link-to 'data-entry.avales.electoral-lists.index'}} {{fa-icon "glass"}} <span>Listas</span> {{/link-to}}
+					</li>					
+					<li>
+					{{#link-to 'data-entry.avales.avals.index'}} {{fa-icon "glass"}} <span>Avales</span> {{/link-to}}
+					</li>	
+					{{/simple-accordion}}
+
+
+
+									
+				{{/if}}			
+			{{/if}}
+		</ul>
+
+
+		<ul class="menu-bottom">
+			<li>
+				<a {{ action 'invalidateSession' }}>
+					Cerrar sesión {{fa-icon "sign-out"}}
+				</a>
+			</li>
+		</ul>
+	</div><!-- main-nav-wrap -->
+
+{{/if}}
+
+<div {{bind-attr class=":content isShowMenu:show isShowApps:is-visible isAvales:-data isDataEntry:-admin isData:-data isRed:-red isCalendar:-calendar isAdmin:-admin"}}>
+	{{outlet}}
+</div>
+
+
+
+<div {{bind-attr class=":modal modal-close isShowPublish:modal-open"}}>
+
+	<div class="modal-overlay"></div>
+	<div class="modal-content">
+		<div class="action-list">
+			<button class="action-item" style="float: right;" {{action 'togglePublish' target="view"}}>{{fa-icon "times"}}</button>
+		</div>
+	 	{{create-entry createAction="createNewEntry" wall=wall classNames="create-entry below30" clear=isHiddenPublish model=newEntry files=controller.files saved=saved}}
+	</div>
+</div>

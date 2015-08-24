@@ -1,0 +1,28 @@
+{{#unless hasLayers}}
+	<div class="maps-loading">
+		{{loading-spin color='#888' size=25 classNames="maps-loader"}}
+	</div>
+{{/unless}}
+
+<div class="map-container -avales">
+	<div class="full-map">
+		{{view 'map' groupLayer=groupLayer lat=lat long=long zoom=zoom }}
+	</div>
+</div>	
+
+<div {{bind-attr class=":aval-panel-actions isExpandPanel:-expand"}}>
+	<div id="panel-select-line" class="select-line">
+		
+	</div>
+	<button class="action-expand" {{action 'toggleExpand'}} >
+		{{#if isExpandPanel}}
+			{{fa-icon "compress"}}
+		{{else}}
+			{{fa-icon "expand"}}
+		{{/if}}
+	</button>
+</div>
+
+<div {{bind-attr class=":panel-wrap :show isExpandPanel:-expand-full"}}>
+	{{outlet}}
+</div>	

@@ -1,0 +1,77 @@
+<form {{action "save" on="submit"}} class="create-event">
+  <fieldset>
+    <label>
+      Cargo
+      {{input type="text" value=model.position}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Nivel (Nacional, Municipal, etc)
+      {{input type="text" value=model.level}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Fecha inicio
+    </label>
+    <div class="date-picker-container">
+      {{date-picker date=model.startDate valueFormat='YYYY-MM-DD' utc=true }}
+    </div>
+  </fieldset>  
+  <fieldset>
+    <label>
+      Fecha fin
+    </label>
+    <div class="date-picker-container">
+      {{date-picker date=model.endDate valueFormat='YYYY-MM-DD' utc=true }}
+    </div>
+  </fieldset>  
+
+  <fieldset>
+    <label>
+      Persona Fisica
+    </label>
+    {{#if model.person}}
+      <p>{{model.person.name}} {{model.person.lastName}} <a {{action 'deletePerson'}}>X</a></p>
+    {{else}}
+       {{model-finder modelName='person' model-selected='selectedPerson'}}
+    {{/if}}
+  </fieldset>  
+
+  <fieldset>
+    <label>
+      Partido
+    </label>
+    {{#if model.politicalParty}}
+      <p>{{model.politicalParty.name}} <a {{action 'deletePoliticalParty'}}>X</a></p>
+    {{else}}
+       {{model-finder modelName='political-party' model-selected='selectedPoliticalParty'}}
+    {{/if}}
+  </fieldset>  
+  <fieldset>
+    <label>
+      Provincia
+    </label>
+    {{#if model.province}}
+      <p>{{model.province.name}} <a {{action 'deleteProvince'}}>X</a></p>
+    {{else}}
+       {{model-finder modelName='province' model-selected='selectedProvince'}}
+    {{/if}}
+  </fieldset>    
+  <fieldset>
+    <label>
+      Municipio
+    </label>
+    {{#if model.town}}
+      <p>{{model.town.name}} <a {{action 'deleteTown'}}>X</a></p>
+    {{else}}
+       {{model-finder modelName='town' model-selected='selectedTown'}}
+    {{/if}}
+  </fieldset>     
+
+  <fieldset>
+    <input type="submit" value="Guardar">
+  </fieldset>
+</form>
+    

@@ -1,0 +1,42 @@
+<div class="hero">
+    <div style="width:100%; height:300px">{{view 'map' location=model.location lat=model.location.lat long=model.location.long}}</div>
+</div>
+<section>
+
+<div class="event-meta">
+  <h1>
+    {{model.name}}
+    {{#if (can "edit event" model)}}    
+      {{#link-to 'red.events.edit' model classNames="btn"}}Editar evento{{/link-to}}
+    {{/if}}
+  </h1>
+  <p>{{model.description}}</p>
+  <p>{{time-format model.date }}</p>
+  <p>{{model.hour}}</p>
+  <div>
+    <ul class="pad-lv0">
+      <li><b>Administrador:</b>{{#link-to 'red.profile.show' owner}} {{owner.fullName}} {{/link-to}}</li>
+      <li><b>Miembros:</b> {{members.length}}</li>
+    </ul>
+  </div>
+  
+</div>
+
+{{#if (can "viewEntries event" model)}}
+  <div class="entry-list">
+
+    {{#if entries.length}}
+      <h4>Entradas del evento</h4>
+      {{#each entry in entries.arrangedContent}}
+        {{poly-component entry.componentName entry.proprerties remove='remove' addFavorite='addFavorite' removeFavorite='removeFavorite' }}
+      {{/each}}
+      {{infinity-loader infinityModel=model}}
+    {{else}}
+    <p id="blankslate">
+      No se han encontrado entradas
+    </p>
+    {{/if}}
+  </div>
+
+{{/if}}
+</section>

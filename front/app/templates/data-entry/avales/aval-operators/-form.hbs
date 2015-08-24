@@ -1,0 +1,18 @@
+<form {{action "save" on="submit"}} class="create-event">
+  <fieldset>
+    <label>
+      Numero
+      {{input type="text" value=model.number}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Descripcion
+      {{textarea type="text" value=model.description}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <input type="submit" value="Guardar">
+  </fieldset>  
+</form>
+    

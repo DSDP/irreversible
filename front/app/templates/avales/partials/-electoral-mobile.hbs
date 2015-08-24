@@ -1,0 +1,62 @@
+<div class="data-avales">
+	
+
+	{{#ember-wormhole to="panel-select-line"}}
+		<div class="line-icon">
+			{{fa-icon 'archive'}}
+		</div>
+		<h1>{{currentLine.townsCompletedCount}} / 135</h1>
+		{{view "select" content=model.lines value=currentLine optionLabelPath='content.number'}}
+	{{/ember-wormhole}}
+	{{#if currentLine}}
+
+		{{#view 'avales/aval-status-list' model=currentLine class="line-container" tagName='div'}}
+			<div class="search-form">
+				{{input type="text" value=view.filterText class="field" placeholder="Buscar"}}
+				<button class="search-clear" {{action 'clear' target="view"}} >
+					{{fa-icon "close"}}
+				</button>
+			</div>			
+			{{#if view.filterText}}
+				{{#each view.statuses as |avalStatus|}}
+					{{partial 'avales/partials/aval-status'}}
+				{{/each}}
+			{{else}}						
+				{{#ivy-tabs}}
+					{{#ivy-tab-list}}
+						{{#each view.groups as |group|}}
+							{{#ivy-tab}}
+								{{group.electoralSection.shortName}}
+							{{/ivy-tab}}
+						{{/each}}
+					{{/ivy-tab-list}}
+					{{#each view.groups as |group|}}
+						{{#ivy-tab-panel}}
+							{{#view 'avales/group-status' model=group}}
+								
+									<div class="chart-container">
+										<div class="chart-data">	
+											<h4>Distritos de la {{group.electoralSection.name}} </h4>
+											<a>Completos <span class="completeds">{{view.model.completeds}}</span></a>
+											<a>Cargandose <span class="incompleteds">{{view.model.incompleteds}}</span></a>
+										</div>
+										<div class="pie-chart">
+											{{ember-chart type='Pie' data=view.data width=150 height=150}}
+											<span class="inner-pie">
+												<h2>{{view.model.electoralSection.totalTowns}}</h2>
+												<small>Distritos</small>
+											</span>
+										</div>
+									</div>								
+									{{#each group.statuses as |avalStatus|}}
+										{{partial 'avales/partials/aval-status'}}
+									{{/each}}					
+							{{/view}}
+						{{/ivy-tab-panel}}
+					{{/each}}
+				{{/ivy-tabs}}			
+			{{/if}}
+		{{/view}}
+	{{/if}}
+	
+</div>

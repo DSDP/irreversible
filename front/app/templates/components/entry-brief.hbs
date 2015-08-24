@@ -1,0 +1,12 @@
+{{#if image}} 
+  <div class="entry-image">
+    <img {{bind-attr src=image}}/>
+  </div>
+{{/if}}
+{{#if youtube}}
+  <div class="video-wrapper">
+  <iframe {{bind-attr src=youtube}}
+        width="420" height="345" 
+        type="application/x-shockwave-flash" frameborder="0" allowfullscreen/>
+  </div>
+{{/if}}

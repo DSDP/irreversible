@@ -1,0 +1,34 @@
+<div class="entry-item -item-video">
+	<figure class="entry-avatar">
+		{{#if entry.owner.avatar.url}}
+			<div class="img-container">
+				<img {{bind-attr src="entry.owner.avatar.url"}}/>
+			</div>
+			{{else}}
+			<div class="img-container -no-user">
+				<img src="/assets/images/no-user-img.jpg" />
+			</div>
+		{{/if}}
+	</figure>
+	<div class="entry-content">
+		{{partial 'red/entries/brief-header'}}
+		<p class="entry-message">{{link-safe entry.message}}</p>
+		<div class="files-container">
+		{{#if entry.files}}
+			{{#if entry.files}}
+				{{#each file in entry.files}}
+					<video controls>
+					   <source {{bind-attr src=file.url}} type="video/mp4">
+					 </video>
+				{{/each}}
+			{{/if}}
+
+		{{else}}
+			{{entry-brief message=entry.message}}
+		{{/if}}
+		</div>
+
+		{{partial 'red/entries/brief-footer'}}
+	</div>
+</div>
+

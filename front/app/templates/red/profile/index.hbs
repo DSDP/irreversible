@@ -1,0 +1,86 @@
+<div class="hero">
+	<div class="hero-inner">
+    	<div class="hero-logo">
+    		{{#if avatar.url}}
+    			<div class="img-container">
+   					<img {{bind-attr src=avatar.url}}>
+   				</div>
+    		{{/if}}
+		</div>
+		<div class="hero-copy">
+			<h1>{{name}} {{lastName}}</h1>
+			<p>{{email}}</p>
+			<div class="stats">
+			  <ul>
+			    <li>{{friends.length}}<span>Amigos</span></li>
+			    <li>{{files.length}}<span>Archivos</span></li>
+			    <li>{{events.length}}<span>Eventos</span></li>
+			    <li>{{groups.length}}<span>Grupos</span></li>
+			  </ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+	{{#ivy-tabs}}
+
+		{{#ivy-tab-list}}
+			{{#ivy-tab}}Entradas{{/ivy-tab}}
+			{{#ivy-tab}}Compañeros{{/ivy-tab}}
+			{{#ivy-tab}}Archivos{{/ivy-tab}}
+		{{/ivy-tab-list}}
+
+
+		{{#ivy-tab-panel}}
+			<div class="profile-entries">
+				<div class="entry-list">
+					{{#if entries}}
+						{{#each entry in entries}}
+							{{poly-component entry.componentName entry.proprerties remove='remove' addFavorite='addFavorite' removeFavorite='removeFavorite' }}
+						{{/each}}
+						{{infinity-loader infinityModel=model}}
+					{{else}}
+						<div class="loading">
+							{{loading-bubbles color='#0083ff' size=100}}
+						</div>
+					{{/if}}
+				</div>
+			</div>
+		{{/ivy-tab-panel}}
+
+		{{#ivy-tab-panel}}
+			<div class="profile-entries">
+				<ul class="entry-list -friends">
+					{{#each friend in model.friends}}
+						{{#if friend.email}}
+							<li class="entry-item">
+								{{#link-to 'red.profile.show' friend classNames="friend-meta"}}
+									<span class="friend-name">{{friend.fullName}}</span>
+									<i class="friend-mail">{{friend.email}}</i>
+								{{/link-to}}
+								{{#link-to 'red.profile.show' friend classNames="btn"}}
+									Ver perfil
+								{{/link-to}}
+							</li>
+						{{/if}}
+					{{/each}}
+				</ul>
+			</div>
+		{{/ivy-tab-panel}}
+
+		{{#ivy-tab-panel}}
+			<div class="profile-entries">
+				<ul class="entry-list -files">
+					{{#each file in model.files}}
+						{{#if file.fileType}}
+							{{poly-component file.fileType file.properties}}
+						{{/if}}
+					{{/each}}
+				</ul>
+			</div>
+		{{/ivy-tab-panel}}
+	{{/ivy-tabs}}
+
+

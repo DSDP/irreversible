@@ -1,0 +1,99 @@
+
+<div class="simple-entries">
+  <div class="page-header">
+  <h4>
+      {{#link-to 'red.index'}}
+      <span>Novedades</span>
+      {{/link-to}}
+
+      {{#link-to 'red.groups.index'}}
+      <span>Grupos</span>
+      {{/link-to}}
+      {{#link-to 'red.events.index'}}
+      <span>Eventos</span>
+      {{/link-to}}
+    </h4>
+  </div>
+  <div class="entry-list -events">
+    {{#if model.length}}
+      <div class="section-header">
+      <h1 class="invisible">Eventos</h1>
+        {{link-to "Nuevo evento" "red.events.new" classNames="btn" }}
+      </div>
+
+      
+
+
+      
+
+      <div class="section-content">
+            {{#each event in model}}
+
+              <div class="entry-item ">
+                <figure class="entry-avatar">
+                  {{#if event.avatar.url}}
+                    <div class="img-container">
+                      <img {{bind-attr src="event.avatar.url"}}/>
+                    </div>
+                    {{else}}
+                    <div class="img-container -no-user">
+                      <img src="assets/images/logo-irreversible.svg">
+                    </div>
+                  {{/if}}
+                </figure>
+                <div class="entry-content">
+                <h3 class="entry-title">
+                      {{event.name}} <br>
+                      <small>Administrador: {{event.owner.fullName}}</small>
+                  </h3>
+                  <div class="entry-meta">
+  <small>
+    {{time-format event.date }}             
+  </small>
+ 
+</div>
+                  <p class="entry-message">
+                  {{event.description}} <br><br>
+                  <div style="width:100%; height:300px">{{view 'map' location=event.location lat=event.location.lat long=event.location.long}}</div></p>
+                  <div class="entry-action">
+                  {{#if (can 'edit events' event)}}
+                     {{#link-to "red.events.edit" event}}
+                      {{fa-icon "pencil"}}
+                      Editar
+                    {{/link-to}}
+                  {{/if}}
+
+                  {{#link-to "red.events.show" event}}
+                    {{fa-icon "eye"}}
+                    Ver más
+                  {{/link-to}}
+                  
+                  {{#if (can 'delete events' event)}}
+                    <a href="#" {{action "remove" event}}>
+                      {{fa-icon "trash-o"}} Eliminar
+                    </a>
+                  {{/if}}
+                </div>
+                </div>
+                
+                
+              </div>
+            {{/each}}
+      </div>
+      {{else}}
+        <div class="no-content -groups">
+          <h2>{{fa-icon "users"}}</h2>
+          <p>No tiene grupos</p> <br>
+           {{link-to "Nuevo grupo" "red.groups.new" classNames="btn" }}
+        </div>
+      {{/if}}
+  </div>
+</div>
+
+
+
+
+
+
+
+

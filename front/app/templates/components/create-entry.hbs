@@ -1,0 +1,64 @@
+<form {{action "save" on="submit"}} class="simple-form relative">
+      {{#ivy-tabs}}
+
+    {{#ivy-tab-list classNames="type-entry"}}
+      {{#ivy-tab}}
+        <a class="list-group-item" {{action 'changeType' 'message'}}>
+           {{fa-icon "comment"}}
+        </a>
+      {{/ivy-tab}}
+      
+      {{#ivy-tab}}
+        <a class="list-group-item" {{action 'changeType' 'video'}}>
+        {{fa-icon "video-camera"}}
+      </a>
+      {{/ivy-tab}}
+
+      {{#ivy-tab}}
+         <a class="list-group-item" {{action 'changeType' 'image'}}>
+         {{fa-icon "picture-o"}}
+      </a>
+      {{/ivy-tab}}
+
+      {{#ivy-tab}}
+        <a class="list-group-item" {{action 'changeType' 'file'}}>
+         {{fa-icon "file-o"}}
+      </a>
+      {{/ivy-tab}}
+    {{/ivy-tab-list}}
+
+    {{#ivy-tab-panel classNames="pad-lv3 pad-lr0 pad-b0"}} 
+    <p>Compartir comentario</p>
+     {{textarea type="text" value=message classNames="below6"}}
+     {{file-uploader multiple=false t="message" type=type class="display-none" showLoader=true clear=clear}}
+    {{/ivy-tab-panel}}
+
+    {{#ivy-tab-panel classNames="pad-lv3 pad-lr0 pad-b0"}}
+    <p>Compartir video</p>
+     {{textarea type="text" value=message classNames="below6"}}
+      {{file-uploader files=files multiple=false accept="video/mp4" t="video" type=type showLoader=true clear=clear}}
+    {{/ivy-tab-panel}}
+
+    {{#ivy-tab-panel classNames="pad-lv3 pad-lr0 pad-b0"}}
+      <p>Compartir imagen</p>
+      {{textarea type="text" value=message classNames="below6"}}
+      {{file-uploader files=files multiple=true accept="image/jpeg, image/png" t="image" type=type showLoader=true clear=clear}}
+    {{/ivy-tab-panel}}
+    
+    {{#ivy-tab-panel classNames="pad-lv3 pad-lr0 pad-b0"}}
+    <p>Compartir archivo</p>
+      {{textarea type="text" value=message classNames="below6"}}
+      {{file-uploader files=files multiple=true accept="*" t="file" type=type clear=clear}}
+    {{/ivy-tab-panel}}
+  {{/ivy-tabs}}
+
+  <input type="submit" value="Publicar" class="btn" {{bind-attr disabled=disablePublish}}>
+
+  {{#if loading}}
+	{{loading-spin color='#999' size=25 classNames="mar-lv2"}}
+	<i>Publicando</i>
+  {{/if}}
+</form>
+
+
+

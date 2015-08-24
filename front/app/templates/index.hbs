@@ -1,0 +1,70 @@
+<div class="dashboard">
+  {{#if (can 'view red')}}
+    <div {{bind-attr class=":dash-item isRed:active"}}>
+    {{#link-to 'red.index'}} 
+    {{fa-icon "share-alt" size="3"}}
+    <h3>Red</h3>
+    {{/link-to}}
+  </div>
+  {{/if}}
+  {{#if (can 'view municipability')}}
+    <div {{bind-attr class=":dash-item isData:active"}}>
+    {{#link-to 'municipabilities.index'}} 
+    {{fa-icon "map-marker" size="3"}}
+    <h3>Datos</h3>
+    {{/link-to}}
+    </div>
+  {{/if}}
+
+  {{#if (can 'view aval')}}
+    <div {{bind-attr class=":dash-item isAvales:active"}}>
+    {{#link-to 'avales.index'}} 
+    {{fa-icon "archive" size="3"}}
+    <h3>Avales</h3>
+    <h5>Modulo de monitoreo de carga de avales</h5>
+    {{/link-to}}
+    </div>
+  {{/if}}     
+
+  {{#if (can 'view calendar')}}
+    <div {{bind-attr class=":dash-item isCalendar:active"}} >
+    {{#link-to 'calendar.index'}} 
+    {{fa-icon "calendar" size="3"}}
+    <h3>Calendario</h3>
+    {{/link-to}}
+    </div>
+  {{/if}}
+
+  {{#if (can 'view admin')}}
+    <div {{bind-attr class=":dash-item isAdmin:active"}} >
+      {{#link-to 'admin.users.index'}} 
+        {{fa-icon "wrench" size="3"}}
+        <h3>Administración</h3>
+      {{/link-to}}
+    </div>
+  {{/if}}
+
+  {{#if (can 'view data-entry')}}
+      <div {{bind-attr class=":dash-item isDataEntry:active"}} >
+        {{#link-to 'data-entry.municipabilities.people.index'}} 
+          {{fa-icon "user-plus" size="3"}}
+          <h3>Manejo de datos</h3>
+          <h5>Módulo de gestión de información</h5>
+          {{/link-to}}
+      </div>
+  {{/if}}
+
+
+  <div {{bind-attr class=":dash-item isFesta:active"}} >
+    {{#link-to 'festa'}} 
+      {{fa-icon "party" size="3"}}
+      <h3>Festa</h3>
+    {{/link-to}}
+  </div>
+
+</div>
+
+
+  
+   
+      

@@ -1,0 +1,101 @@
+
+{{#ivy-tabs}}
+	{{#ivy-tab-list class="tab-animation"}}
+		{{#ivy-tab}}Elecciones{{/ivy-tab}}
+		{{#ivy-tab}}Renovacion{{/ivy-tab}}
+	{{/ivy-tab-list}}
+
+
+	{{#ivy-tab-panel}}
+		{{#if model.elections}}
+			{{#each electoralElection in model.elections}}
+				{{#view 'municipabilities/electoral-elections/brief' model=electoralElection}}
+					<div class="election-list">
+							{{#if controllers.municipabilities.isExpandPanel}}
+								<div class="name -expanded">
+									<h2>{{electoralElection.name}}</h2>
+								</div>
+								<ul>
+									{{#each electoralElection.electoralLists as |electoralList|}}
+										{{electoralList.name}}
+									{{/each}}
+								</ul>
+								{{#if electoralElection.enrolled}}
+									<div class="votes-poll -expanded">
+										{{#if view.electoralVoters.length}}
+											{{ember-chart type='Line' data=view.dataTest width=550 height=300}}
+										{{/if}}
+									</div>
+								{{else}}
+									<div class="electoral-time -expanded">
+										<time>{{time-format electoralElection.date}}</time>
+										<small>- {{time-ago-in-words electoralElection.date}}</small>
+									</div>
+								{{/if}}
+							{{else}}
+								<div class="name">
+									<h2>{{electoralElection.name}}</h2>
+								</div>
+								{{#if electoralElection.enrolled}}
+									<div class="votes-poll">
+										{{#if electoralElection.enrolled}}
+											{{ember-chart type='Line' data=view.dataTest width=350 height=200}}
+										{{/if}}
+									</div>
+								{{else}}
+									<div class="electoral-time">
+										<time>{{time-format electoralElection.date}}</time>
+										<small>- {{time-ago-in-words electoralElection.date}}</small>
+									</div>
+								{{/if}}
+							{{/if}}
+						</div>
+				{{/view}}
+			{{/each}}
+		{{/if}}
+	{{/ivy-tab-panel}}
+
+	{{#ivy-tab-panel}}
+		{{#if controllers.municipabilities.renovation}}
+			
+				<div class="panel-renovation">
+						
+					{{#ivy-tabs}}
+						{{#ivy-tab-list}}
+							{{#ivy-tab}}Diputados ({{controllers.municipabilities.renovation.deputies.length}}){{/ivy-tab}}
+							{{#ivy-tab}}Senadores ({{controllers.municipabilities.renovation.senators.length}}){{/ivy-tab}}
+						{{/ivy-tab-list}}	
+
+						{{#ivy-tab-panel}}
+							<div class="slat-list">
+							{{#each senator in controllers.municipabilities.renovation.senators}}
+								<div class="slat-item">
+								    <div class="palet-color">
+              							{{{color-div senator.politicalParty.color}}}
+              						</div> 								
+									{{senator.person.fullNameProperty}} {{senator.politicalParty.name}}
+								</div> 	
+							{{/each}}				
+							</div>
+						{{/ivy-tab-panel}}
+
+						{{#ivy-tab-panel}}
+							<div class="slat-list">
+							{{#each deputie in controllers.municipabilities.renovation.deputies}}
+								<div class="slat-item">
+								    <div class="palet-color">
+              							{{{color-div deputie.politicalParty.color}}}
+              						</div> 								
+									{{deputie.person.fullNameProperty}} {{deputie.politicalParty.name}}
+								</div> 	
+							{{/each}}	
+							</div>	
+						{{/ivy-tab-panel}}	
+
+								
+					{{/ivy-tabs}}			
+				</div>
+			
+		{{/if}}	
+	{{/ivy-tab-panel}}
+{{/ivy-tabs}}

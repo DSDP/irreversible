@@ -1,0 +1,159 @@
+.panel-wrap.-expand-full {
+	.data-votes {
+		width: 100%;
+	}	
+}
+
+.data-votes {
+	    position: relative;
+    padding-top: 90px;
+    width: 433px;
+
+
+	.panel-hero {
+		    position: relative;
+    width: 100%;
+    min-height: 218px;
+    background: #e8e8e8;
+    padding: 0;
+
+		.side-festa,
+		.side-other {
+			    float: left;
+    width: 50%;
+    text-align: center;
+    padding: 20px;
+		}
+
+		.votes {
+    margin-top: 10px;
+
+    h3 {
+    	margin: 0;
+    }
+		}
+
+		.img-container {
+			       position: relative;
+    border-radius: 50px;
+    overflow: hidden;
+    width: 80px;
+    margin: 0 auto;
+    border: 2px solid #f0f0f0
+		}
+
+		.side-festa {
+			position: relative;
+			background: #ddd;
+
+		}
+
+		.side-other {
+			position: relative;
+
+		}
+
+
+
+	}
+
+	.school-list {
+		position: relative;
+    padding:  0;
+    float: left;
+    background: #f9f9f9;
+    margin: 0;
+    width: 100%;
+
+    .school-votes {
+    	    position: absolute;
+    right: 80px;
+    top: -11px;
+    text-align: right;
+    }
+
+
+		.school-item {
+			position: relative;
+			border-bottom: 1px solid #ccc;
+			padding: 0;
+
+		}
+
+		h3 {
+			font-size: 20px;
+			padding: 0 15px
+		}
+
+		.js-accordion-trigger{
+			top: -5px;
+		}
+	}
+
+	.board-list {
+		    position: relative;
+    padding: 0;
+    border-top: 1px solid #ccc;
+
+		.board-item {
+			position: relative;
+		    padding: 10px;
+		    border-bottom: 1px solid #ccc;
+
+		    &.festa-friendly {
+		    	background: lighten(#0083ff, 45%);
+		    	border-bottom: 1px solid #0083ff;
+		    }
+
+		    p {
+			    color: #777;
+			    display: inline-block;
+			    float: right;
+			    margin: 0 15px;
+			    text-align: center;
+			    width: 100px;
+			}
+
+			.side-festa {
+				color: #0075e5;
+			}
+
+		}
+
+	}
+
+	p {
+		margin: 0;
+		color: #777;
+	}
+
+	.side-festa {
+		color: #0075e5;
+	}
+
+}
+
+.votes-panel-actions {
+	    position: fixed;
+    width: 432px;
+    background-color: #0075e5;
+    z-index: 6000;
+    top: 0;
+    right: 18px;
+    height: 90px;
+    -webkit-transition: all 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+    -moz-transition: all 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+    transition: all 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+
+	&.-expand {
+		width: 100%;
+	}
+	
+    .fa {
+		color: #fff;
+    }
+}
+
+.leaflet-popup .leaflet-popup-content h4 {
+	    font-size: 22px;
+}

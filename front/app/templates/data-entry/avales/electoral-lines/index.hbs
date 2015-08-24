@@ -1,0 +1,67 @@
+<h1>Lineas</h1>
+
+<p>
+  {{link-to "Agregar" "data-entry.avales.electoral-lines.new" }}
+</p>
+{{#if model.length}}
+  <table class="table-minimal">
+    <thead>
+      <tr>
+        <th>
+          Numero
+        </th>
+        <th>
+          Provincia
+        </th>        
+        <th>
+          Seccion 
+        </th>
+        <th>
+          Municipio
+        </th>    
+        <th>
+          Avales necesarios
+        </th>
+        <th>
+          Avales cargados
+        </th>        
+        <th colspan="3">
+          Actiones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each electoralLine in model}}
+        <tr>
+          <td>
+           	{{electoralLine.number}}
+          </td>
+          <td>
+            {{electoralLine.province.name}}
+          </td>          
+          <td>
+            {{electoralLine.electoralSection.name}}
+          </td>
+          <td>
+            {{electoralLine.town.name}}
+          </td>  
+          <td>
+            {{electoralLine.avalesNeed}} 
+          </td>          
+          <td>
+            {{electoralLine.avalesEntry}} 
+          </td>                    
+          <td>
+            {{link-to "Editar" "data-entry.avales.electoral-lines.edit" electoralLine}}
+            <a href="#" {{action "remove" electoralLine}}>Eliminar</a>
+          </td>
+        </tr>
+      {{/each}}
+      {{infinity-loader infinityModel=model}}
+    </tbody>
+  </table>
+{{else}}
+  <p id="blankslate">
+    No Lines found
+  </p>
+{{/if}}

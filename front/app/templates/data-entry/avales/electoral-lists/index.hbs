@@ -1,0 +1,70 @@
+<h1>Listas</h1>
+
+<p>
+  {{link-to "Agregar" "data-entry.avales.electoral-lists.new" }}
+</p>
+
+{{#if model.length}}
+  <table class="table-minimal">
+    <thead>
+      <tr>
+        <th>
+          Nombre
+        </th>
+        <th>
+          Descripcion
+        </th>
+        <th>
+          Eleccion
+        </th>    
+        <th>
+          Partido Politico
+        </th>
+        <th>
+          Provincia
+        </th>
+        <th>
+          Distrito
+        </th>        
+        <th colspan="3">
+          Actiones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each list in model}}
+        <tr>
+          <td>
+           	{{list.name}}
+          </td>
+          <td>
+            {{list.description}}
+          </td>
+          <td>
+            {{list.electoralElection.name}}
+          </td>          
+          <td>
+            {{list.politicalParty.name}}
+          </td>  
+          <td>
+            {{list.province.name}}
+          </td>          
+          <td>
+            {{list.town.name}}
+          </td>       
+          <td>
+            {{link-to "Editar" "data-entry.avales.electoral-lists.edit" list}}
+          </td>
+          <td>
+            <a href="#" {{action "remove" list}}>Eliminar</a>
+          </td>
+        </tr>
+      {{/each}}
+      {{infinity-loader infinityModel=model}}
+    </tbody>
+  </table>
+{{else}}
+  <p id="blankslate">
+    No candidates found
+  </p>
+{{/if}}

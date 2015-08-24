@@ -1,0 +1,116 @@
+<div class="action-back">
+	{{#link-to 'municipabilities.provinces.show' model.town.province.id  }} {{fa-icon "arrow-left"}} {{/link-to}}
+</div>
+
+
+{{#ivy-tabs}}
+		{{#ivy-tab-list}}
+			{{#ivy-tab}}Elecciones{{/ivy-tab}}
+			{{#ivy-tab}}Renovacion{{/ivy-tab}}
+		{{/ivy-tab-list}}
+
+
+		{{#ivy-tab-panel}}
+			<div>
+				Nacionales
+				{{#each electoralElection in model.nationalElections}}
+					<div class="election-list">
+						<div class="name -expanded">
+							<h2>{{electoralElection.name}}</h2>
+						</div>
+						
+						<ul>
+							{{#each electoralElection.electoralLists as |electoralList|}}
+								<li>
+									{{electoralList.name}}	
+									<ul>
+										{{#each electoralList.candidates as |candidate|}}
+											<li>{{candidate.charge.name}} {{candidate.charge.scope}} {{candidate.comment}} {{candidate.politicalSpace.name}} {{candidate.province.name}}</li>
+										{{/each}}
+									</ul>
+								</li>
+							{{/each}}
+						</ul>
+					</div>	
+				{{/each}}
+			</div>
+		{{/ivy-tab-panel}}
+
+		{{#ivy-tab-panel}}
+			{{#if controllers.municipabilities.renovation}}
+
+				<div class="panel-renovation">
+					
+					{{#ivy-tabs}}
+						
+						{{#ivy-tab-list classNames="-stats-tab"}}
+							{{#ivy-tab}}
+								<span>{{controllers.municipabilities.renovation.deputies.length}}</span>
+								<p>Diputados</p>
+							{{/ivy-tab}}
+							{{#ivy-tab}}
+								<span>{{controllers.municipabilities.renovation.senators.length}}</span>
+								<p>Senadores</p>
+							{{/ivy-tab}}
+							
+						{{/ivy-tab-list}}
+						
+						{{#ivy-tab-panel}}
+							<div class="slat-list  -renovation">
+							{{#each deputie in controllers.municipabilities.renovation.deputies}}
+								<div class="slat-item">
+								    <div class="palet-color">
+              							{{{color-div deputie.politicalParty.color}}}
+              						</div> 	
+              						<div class="slat-content">
+	              						<div class="name">
+											<p>{{deputie.person.fullNameProperty}}</p>
+											<small>{{deputie.politicalParty.name}}</small>
+										</div>	
+										{{#if controllers.municipabilities.isExpandPanel}}				
+											<div class="role">
+												<small>Asumió el {{time-format deputie.startDate}}</small> <br>
+												<small>Cumple su mandato {{time-ago-in-words deputie.endDate}}</small>
+						     				</div>
+					     				{{/if}}
+				     				</div>							
+								</div> 	
+							{{/each}}	
+							</div>	
+						{{/ivy-tab-panel}}	
+
+						{{#ivy-tab-panel}}
+							<div class="slat-list  -renovation">
+							{{#each senator in controllers.municipabilities.renovation.senators}}
+								<div class="slat-item">
+								    <div class="palet-color">
+              							{{{color-div senator.politicalParty.color}}}
+              						</div>
+              						<div class="slat-content">
+	              						<div class="name">
+											<p>{{senator.person.fullNameProperty}}</p>
+											<small>{{senator.politicalParty.name}}</small>
+										</div>					
+										{{#if controllers.municipabilities.isExpandPanel}}	
+										<div class="role">
+											<small>Asumió el {{time-format senator.startDate}}</small> <br>
+											<small>Cumple su mandato {{time-ago-in-words senator.endDate}}</small>
+					     				</div>
+					     				{{/if}}
+				     				</div>		
+								</div> 	
+							{{/each}}				
+							</div>
+						{{/ivy-tab-panel}}
+
+							
+					{{/ivy-tabs}}			
+				</div>
+
+			{{/if}}	
+		{{/ivy-tab-panel}}
+	{{/ivy-tabs}}
+
+
+
+

@@ -1,0 +1,7 @@
+{{#if files}}
+	{{#each file in files}}
+		{{#if file.fileType}}
+			{{poly-component file.fileType file.properties delete='delete' isNew=isNew}}
+		{{/if}}
+	{{/each}}
+{{/if}}

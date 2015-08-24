@@ -1,0 +1,52 @@
+{{#unless hasLayers}}
+	<div class="maps-loading">
+		{{loading-spin color='#888' size=25 classNames="maps-loader"}}
+	</div>
+{{/unless}}
+
+<div class="map-container">
+<div class="full-map">
+	{{view 'map' groupLayer=groupLayer lat=lat long=long zoom=zoom }}
+</div>
+</div>
+
+<div {{bind-attr class=":panel-actions isExpandPanel:-expand"}}>
+	<button class="action-expand" {{action 'toggleExpand'}} >
+		{{#if isExpandPanel}}
+			{{fa-icon "compress"}}
+		{{else}}
+			{{fa-icon "expand"}}
+		{{/if}}
+	</button>
+	<button {{bind-attr class=":action-search isExpandSearch:-expand"}} {{action 'toggleExpandSearch'}} >
+		{{#if isExpandSearch}}
+			{{fa-icon "close"}}
+		{{else}}
+			{{fa-icon "search"}}
+		{{/if}}
+	</button>
+	<div {{bind-attr class=":search-container isExpandSearch:show-search"}}>
+		{{#if media.isMobile}}
+		   <button {{bind-attr class=":action-expand :-grey isExpandSearch:-expand"}} {{action 'toggleExpandSearch'}} >
+				{{fa-icon "close"}}
+			</button>
+		{{/if}}
+		
+		{{municipabilities-search}}
+	</div>
+</div>
+
+<div {{bind-attr class=":panel-wrap :show isExpandPanel:-expand-full"}}>
+		<article class="type-system-sans">
+			<div class="panel-header" {{bind-attr style=styleBackground}}>
+				<h1>{{title}}</h1>
+				<div class="political-party">
+			    	<p>{{gobernorName}} {{gobernorLastName}} <br> <span>{{politicalPartyName}}</span></p>
+		    	</div>
+			</div>
+		</article>
+	
+	<div class="container">
+		{{outlet}}
+	</div>
+</div>	

@@ -1,0 +1,39 @@
+
+<form {{action "save" on="submit"}}  class="create-event">
+   <fieldset>
+    <label>
+      Nombre del grupo
+    </label>
+      {{input required='required' type="text" value=model.name}}
+  </fieldset>
+  <fieldset>
+    <label>
+      Descripcion
+    </label>
+       {{input required='required' type="text" value=model.description}}
+  </fieldset>
+  <fieldset>
+    {{add-user store=controller.store list=model.members}}
+
+  </fieldset>
+  <fieldset>
+    <p>Miembros</p>
+
+  <ul class="entry-list -groups">
+      {{#each member in model.members}}
+        {{#if member.email}}
+          <li class="entry-item">
+            {{#link-to 'red.profile.show' friend classNames="friend-meta"}}
+              <span class="friend-name">{{member.fullName}}</span>
+              <i class="friend-mail">{{member.email}}</i>
+            {{/link-to}}
+            <a class="btn" {{action "deleteMember" member}}>eliminar</a>
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </fieldset>
+  <fieldset>
+     <input type="submit" value="Crear grupo">
+  </fieldset>
+</form>

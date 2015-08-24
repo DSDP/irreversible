@@ -1,0 +1,21 @@
+<div class="entry-action">
+	{{#if (can 'edit entry' entry)}}
+		{{#link-to "red.entries.edit" entry}}
+			{{fa-icon "pencil"}}
+			Editar
+		{{/link-to}}
+	{{/if}}
+
+	{{#link-to "red.entries.show" entry}}
+		{{fa-icon "eye"}}
+		Ver más
+	{{/link-to}}
+	
+	{{#if (can 'delete entry' entry)}}
+		<a href="#" {{action "remove" entry}}>
+			{{fa-icon "trash-o"}} Eliminar
+		</a>
+	{{/if}}
+	
+	
+</div>

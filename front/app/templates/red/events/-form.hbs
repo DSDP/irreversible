@@ -1,0 +1,52 @@
+<form {{action "save" on="submit"}} class="create-event">
+  <fieldset>
+    <label>
+      Nombre del evento
+    </label>
+      {{input required='required' type="text" value=model.name}}
+  </fieldset>
+  <fieldset>
+    <label>
+      Descripcion
+    </label>
+      {{input required='required' type="text" value=model.description}}
+  </fieldset>
+
+  <fieldset>
+    <label>
+      Fecha
+    </label>
+    <div class="date-picker-container">
+      {{date-picker date=date valueFormat='YYYY-MM-DD' utc=true }}
+      {{view "select" content=controller.hours value=model.hours}}
+    </div>
+  </fieldset>
+  
+  <fieldset>
+    <label>
+      Direccion
+    </label>
+    {{address-finder locationChanged='locationChanged' address=model.address location=model.location}}
+   </fieldset>
+
+  <fieldset class="event-add-user">
+    {{add-user store=controller.store list=model.members}}
+  </fieldset>
+  <fieldset class="event-user-list">
+    <ul>
+    <label>
+      Miembros agregados
+    </label>
+    {{#each member in model.members}}
+      {{#if member.email}}
+        <li>{{#link-to 'red.profile.show' friend}}{{member.fullName}} {{member.email}} {{/link-to}}
+        <a class="btn" {{action "deleteMember" member}}>eliminar</a></li>
+      {{/if}}
+    {{/each}}
+    </ul>
+  </fieldset>
+
+  <fieldset>
+    <input type="submit" value="Crear evento">
+  </fieldset>
+</form>

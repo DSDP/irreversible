@@ -1,0 +1,10 @@
+{{#if play}}
+	<audio controls>
+	  <source  type="audio/mpeg">
+	</audio>
+{{else}}
+	<div class="asset-audio-preview">
+		{{fa-icon "play"}}
+		<p>{{fileName}}</p>
+	</div>
+{{/if}}

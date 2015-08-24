@@ -1,0 +1,49 @@
+<form {{action "save" on="submit"}} class="create-event">
+  <fieldset>
+    <label>
+      Nombre
+      {{input type="text" value=model.name}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Descripcion
+      {{input type="text" value=model.description}}
+    </label>
+  </fieldset>	
+  <fieldset>
+    <label>
+      Partido Politico
+      {{model-finder modelName='political-party' list=model.politicalParty labelPath="name" sigle=true}}
+    </label>
+  </fieldset>   
+  <fieldset>
+    <label>
+      Provincia
+      {{model-finder modelName='province' list=model.province labelPath="name" sigle=true}}
+    </label>
+  </fieldset> 
+   <fieldset>
+    <label>
+      Seccion Electoral
+      {{model-finder modelName='electoral-section' filter=model.province list=model.electoralSection labelPath="name" sigle=true}}
+    </label>
+  </fieldset>  
+  <fieldset>
+    <label>
+      Municipio
+      {{model-finder modelName='town' list=model.town filter=model.electoralSection labelPath="name" sigle=true}}
+    </label>
+  </fieldset>
+
+  <fieldset>
+  	<label>
+  		Eleccion
+  		{{model-finder modelName='electoral-election' list=model.electoralElection labelPath="name" sigle=true}}
+  	</label>
+  </fieldset>
+  <fieldset>
+    <input type="submit" value="Guardar">
+  </fieldset>
+</form>
+    

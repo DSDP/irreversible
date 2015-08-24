@@ -1,0 +1,7 @@
+{{#if (can 'view calendar')}}
+  {{outlet}}
+{{else}}
+  <div class="loading">
+	{{loading-bubbles color='#0083ff' size=100}}
+</div>
+{{/if}}

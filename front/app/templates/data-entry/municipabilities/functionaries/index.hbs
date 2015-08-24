@@ -1,0 +1,66 @@
+<h1>Funcionarios</h1>
+
+<p>
+  {{link-to "Agregar" "data-entry.municipabilities.functionaries.new" }}
+</p>
+
+{{partial 'data-entry/municipabilities/filter'}}
+
+{{#if model.length}}
+  <table class="table-minimal">
+    <thead>
+      <tr>
+        <th>
+          Nombre
+        </th>
+        <th>
+          Apellido
+        </th>
+        <th>
+          Partido Politico
+        </th>
+        <th>
+          Cargo
+        </th>     
+        <th>
+          Mandato
+        </th>   
+        <th colspan="3">
+          Actiones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each functionary in model}}
+        <tr>
+          <td>
+            {{functionary.person.name}}
+          </td>
+          <td>
+            {{functionary.person.lastName}}
+          </td>
+          <td>
+            {{functionary.politicalParty.name}}
+          </td>          
+          <td>
+            {{functionary.position}} {{functionary.level}}
+          </td>                
+          <td>
+            {{time-format functionary.startDate 'l'}} | {{time-format functionary.endDate 'l'}}
+          </td>              
+          <td>
+            {{link-to "Editar" "data-entry.municipabilities.functionaries.edit" functionary}}
+          </td>
+          <td>
+            <a href="#" {{action "remove" functionary}}>Eliminar</a>
+          </td>
+        </tr>
+      {{/each}}
+      {{infinity-loader infinityModel=model}}      
+    </tbody>
+  </table>
+{{else}}
+  <p id="blankslate">
+    No functionary found
+  </p>
+{{/if}}

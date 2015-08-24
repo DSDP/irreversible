@@ -1,0 +1,31 @@
+{{#if avalStatus.percent}}
+<div {{bind-attr class=":line-item avalStatus.completed:completed"}}>
+	<div class="line-name">
+	<b>{{#if avalStatus.town}}
+		{{avalStatus.town.name}}
+	{{else}}
+		{{fa-icon 'exclamation-triangle'}} {{avalStatus.townName}}
+	{{/if}}</b> <br>
+	
+	<small>{{avalStatus.electoralSection.name}}</small>
+
+	</div>
+	<div class="line-meta">
+		{{#tool-tipster title="Porcentaje cargado" position="top"}} 
+			<b>{{avalStatus.percent}}%</b>
+		{{/tool-tipster}}
+
+		{{#tool-tipster title="Requeridos" position="top"}} 
+			{{avalStatus.avalesNeed}} 
+		{{/tool-tipster}}
+
+		{{#tool-tipster title="Cargados" position="top"}} 
+			{{avalStatus.avalesEntry}}
+		{{/tool-tipster}}
+	</div>
+</div>
+{{else}}
+	<div class="line-item">
+		{{loading-bubbles color='#999' size=30}}
+	</div>
+{{/if}}

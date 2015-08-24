@@ -1,0 +1,43 @@
+<div class="action-back">
+	{{#link-to 'municipabilities.index'}} {{fa-icon "arrow-left"}} {{/link-to}}
+</div>
+
+<div class="panel-people">
+
+	{{#ivy-tabs}}
+
+		{{#ivy-tab-list}}
+			{{#if functionary}}{{#ivy-tab}}Perfil{{/ivy-tab}}{{/if}}
+			{{#if functionaryHistoryList}}{{#ivy-tab}}Historial{{/ivy-tab}}{{/if}}
+			{{#if candidateHistory}}{{#ivy-tab}}Elecciones{{/ivy-tab}}{{/if}}
+		{{/ivy-tab-list}}
+
+
+			{{#if functionary}}
+				{{#ivy-tab-panel}}
+				<p>{{functionary.position}} desde el {{time-format functionary.startDate}} <br>
+				     Cumple su mandato {{time-ago-in-words functionary.endDate}}</p>
+				{{/ivy-tab-panel}}
+			{{/if}}
+
+			{{#if functionaryHistoryList}}
+				{{#ivy-tab-panel}}
+						<ul>
+							{{#each functionary in functionaryHistoryList}}
+								<li>{{functionary.position}} {{functionary.level}} {{functionary.politicalParty.name}} {{functionary.startDate}} {{functionary.endDate}}</li>
+							{{/each}}
+						</ul>
+				{{/ivy-tab-panel}}
+			{{/if}}
+
+			{{#if candidateHistory}}
+				{{#ivy-tab-panel}}
+				<ul>
+					{{#each candidate in candidateHistory}}
+						<li>{{candidate.charge.name}} {{candidate.charge.scope}} {{candidate.politicalParty.name}} {{candidate.list.name}}</li>
+					{{/each}}
+				</ul>
+				{{/ivy-tab-panel}}
+			{{/if}}
+	{{/ivy-tabs}}
+</div>

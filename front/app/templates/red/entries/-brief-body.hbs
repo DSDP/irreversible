@@ -1,0 +1,9 @@
+<p class="entry-message">{{link-safe entry.message}}</p>
+<div class="files-container">
+{{#if entry.files}}
+	{{asset-preview files=entry.files}}
+{{else}}
+	{{entry-brief message=entry.message}}
+{{/if}}
+</div>
+

@@ -1,0 +1,74 @@
+<form {{action "save" on="submit"}} class="create-event">
+  <fieldset>
+    <label>
+      Nombre
+      {{input type="text" value=model.name}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Fecha
+    </label>
+    <div class="date-picker-container">
+      {{date-picker date=model.date valueFormat='YYYY-MM-DD' utc=true }}
+    </div>
+  </fieldset>  
+  <fieldset>
+    <label>
+      Nacionales
+      {{input type="checkbox" checked=model.national}}
+    </label>
+  </fieldset>  
+  <fieldset>
+    <label>
+      Provincia
+      {{model-finder modelName='province' list=model.province labelPath="name" sigle=true}}
+    </label>
+  </fieldset> 
+   <fieldset>
+    <label>
+      Seccion Electoral
+      {{model-finder modelName='electoral-section' filter=model.province list=model.electoralSection labelPath="name" sigle=true}}
+    </label>
+  </fieldset>  
+  <fieldset>
+    <label>
+      Municipio
+      {{model-finder modelName='town' list=model.town filter=model.electoralSection labelPath="name" sigle=true}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Inscriptos
+      {{input type="text" value=model.enrolled}}
+    </label>
+  </fieldset>  
+  <fieldset>
+    <label>
+      Votantes
+      {{input type="text" value=model.voters}}
+    </label>
+  </fieldset>  
+ <fieldset>
+    <label>
+      Votos validos
+      {{input type="text" value=model.votersValid}}
+    </label>
+  </fieldset>  
+  <fieldset>
+    <label>
+      Votos en blanco
+      {{input type="text" value=model.votersBlank}}
+    </label>
+  </fieldset>  
+  <fieldset>
+    <label>
+      Votos nulos
+      {{input type="text" value=model.votersNull}}
+    </label>
+  </fieldset>      
+  <fieldset>
+    <input type="submit" value="Guardar">
+  </fieldset>
+</form>
+    

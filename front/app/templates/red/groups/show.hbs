@@ -1,0 +1,47 @@
+<div class="hero below30">
+  <div class="hero-inner">
+    <div class="hero-logo">
+        
+        <div class="img-container">
+          <img {{bind-attr src=model.avatar.url}}>
+        </div>
+        
+    </div>
+    <div class="hero-copy">
+      <h1>{{model.name}}</h1>
+      <p>{{model.description}}</p>
+      <div>
+        <ul class="pad-lv0">
+          <li>{{#tool-tipster title="Administrador" position="bottom"}} 
+    {{#link-to 'red.profile.show' owner}} {{owner.fullName}} {{/link-to}}
+  {{/tool-tipster}}</li>
+          <li>Miembros: {{members.length}}</li>
+        </ul>
+      </div>
+      {{#if (can "edit group" model)}}
+        {{#link-to 'red.groups.edit' model classNames="btn"}}Editar Grupo{{/link-to}}
+      {{/if}}
+    </div>
+      
+  </div>
+</div>
+
+<section>
+
+{{#if (can "viewEntries group" model)}}
+  <div class="entry-list">
+
+    {{#if entries.length}}
+      {{#each entry in entries.arrangedContent}}
+        {{poly-component entry.componentName entry.proprerties remove='remove' addFavorite='addFavorite' removeFavorite='removeFavorite' }}
+      {{/each}}
+      {{infinity-loader infinityModel=model}}
+    {{else}}
+    <p id="blankslate">
+      No se han encontrado entradas
+    </p>
+    {{/if}}
+  </div>
+
+{{/if}}
+</section>

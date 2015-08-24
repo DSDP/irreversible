@@ -1,0 +1,32 @@
+<h3 class="entry-title">
+  {{#link-to "red.profile.show" entry.owner }}
+  	{{entry.owner.fullName}}
+  {{/link-to}}<br>
+  <small>{{time-ago-in-words entry.createdAt}}</small>
+</h3>
+
+<div class="entry-meta">
+	<small>
+	  {{#if entry.wall.group}}
+	    Publicado en 
+	    {{#link-to "red.groups.show" entry.wall.group }}
+	        {{entry.wall.group.name}}
+	      {{/link-to}}
+	  {{/if}}
+	  {{#if entry.wall.user}}
+	    Publicado en {{entry.wall.user.fullName}}
+	  {{/if}}                
+	</small>
+	{{#if (can 'favorite entry' entry) }}
+		{{#tool-tipster title="Agregar a favoritos" position="bottom"}} 
+    <a class="entry-favorites-btn " {{action 'addFavorite' entry}}>{{fa-icon "star-o"}}</a>
+  {{/tool-tipster}}
+		
+	{{else}}
+	{{#tool-tipster title="Quitar de favoritos" position="bottom"}} 
+    <a class="entry-favorites-btn -active" {{action 'removeFavorite' entry}}>{{fa-icon "star"}}</a>
+  {{/tool-tipster}}
+		
+	{{/if}}	
+</div>
+

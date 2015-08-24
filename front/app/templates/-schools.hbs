@@ -1,0 +1,56 @@
+
+<div class="data-votes">
+	<div class="panel-hero">
+		<div class="side-festa">
+			<div class="img-container">
+			<img src="assets/images/moreno_festa.jpg" alt="" width="80px">
+				
+			</div>
+			
+			<div class="votes">
+				<h3>{{percent-of festaTotalPoints totalPoints }}</h3>
+				<b>Walter Festa</b><br>
+				<i>Lista 4</i>
+			</div>
+		</div>
+		<div class="side-other">
+			<div class="img-container">
+				
+			<img src="assets/images/moreno_west.jpg" alt="" width="80px">
+			</div>
+			
+			<div class="votes">
+				<h3>{{percent-of westTotalPoints totalPoints }}</h3>
+				<b>Mariano West</b><br>
+				<i>Lista 2</i>
+			</div>
+		</div>
+
+	</div>
+	<ul class="school-list">
+	{{#each schools as |school|}}
+		<div  {{bind-attr class=":school-item school.isFestaFriendly:festa-friendly"}}>
+			<div class="school-votes">
+				<p class="side-festa">Festa:  {{percent-of school.festaTotalPoints school.totalPoints }}</p>
+				<p>West: {{percent-of school.westTotalPoints school.totalPoints }}</p>
+			</div>
+		
+
+
+			{{#simple-accordion title=school.name}}
+				<ul class="board-list">
+				{{#each school.boards as |board|}}
+					<li {{bind-attr class=":board-item board.isFestaFriendly:festa-friendly"}}>
+						<b>Mesa N°{{board.name}}</b>
+						<p>West: {{percent-of board.westPoints board.totalPoints }}</p>
+						<p class="side-festa">Festa: {{percent-of board.festaPoints board.totalPoints }}</p>
+					</li>
+				{{/each}}
+				</ul>
+			{{/simple-accordion}}
+		</div>
+	{{/each}}
+	</ul>
+</div>
+
+

@@ -1,0 +1,50 @@
+<div class="hero">
+	<div class="hero-inner">
+    	<div class="hero-logo">
+    		{{#if avatar.url}}
+    			<div class="img-container">
+   					<img {{bind-attr src=avatar.url}}>
+   				</div>
+    		{{/if}}
+		</div>
+		<div class="hero-copy">
+			<h1>{{name}} {{lastName}}</h1>
+			<p>{{email}}</p>
+			<div class="stats">
+			  <ul>
+			    <li>{{friends.length}}<span>Amigos</span></li>
+			    <li>{{files.length}}<span>Archivos</span></li>
+			    <li>{{events.length}}<span>Eventos</span></li>
+			    <li>{{groups.length}}<span>Grupos</span></li>
+			  </ul>
+			</div>
+		</div>
+    	
+	</div>
+</div>
+
+<section>
+
+	
+
+	{{#if (can "viewEntries user" model)}}
+	<h4 style="text-align: center">Ultima actividad</h4>
+
+	<div class="profile-entries">
+		<div class="entry-list">
+		{{#if entries}}
+			{{#each entry in entries}}
+				{{poly-component entry.componentName entry.proprerties remove='remove' addFavorite='addFavorite' removeFavorite='removeFavorite' }}
+			{{/each}}
+			{{infinity-loader infinityModel=model}}
+		{{else}}
+			<p>Cargando</p>
+		{{/if}}
+		</div>
+	</div>
+	{{else}}
+	{{#if (can "friendRequest user" model)}}
+			<p><a {{action 'friendRequest'}}>Solicitar amistad</a></p>
+		{{/if}}
+	{{/if}}
+</section>

@@ -1,0 +1,30 @@
+
+<div class="simple-entries">
+  <div class="page-header">
+  <h4>
+      {{#link-to 'red.index'}}
+      <span>Novedades</span>
+      {{/link-to}}
+
+      {{#link-to 'red.groups.index'}}
+      <span>Grupos</span>
+      {{/link-to}}
+      {{#link-to 'red.events.index'}}
+      <span>Eventos</span>
+      {{/link-to}}
+    </h4>
+  </div>
+  <div class="entry-list">
+    {{#if model.length}}
+          {{#each entry in controller.arrangedContent}}
+              {{poly-component entry.componentName entry.proprerties remove='remove' addFavorite='addFavorite' removeFavorite='removeFavorite' }}
+          {{/each}}    
+          {{infinity-loader infinityModel=model}}
+    {{else}}
+      <p id="blankslate">
+        No se han encontrado entradas
+      </p>
+    {{/if}}
+  </div>
+</div>
+

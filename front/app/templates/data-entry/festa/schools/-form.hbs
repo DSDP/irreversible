@@ -1,0 +1,20 @@
+<form {{action "save" on="submit"}} class="create-event">
+  <fieldset>
+    <label>
+      Nombre
+      {{input type="text" value=model.name}}
+    </label>
+  </fieldset>
+  <fieldset>
+      {{#each model.boards as |board|}}
+    	<label>
+      		Mesa: {{board.name}} 
+      		West: {{input type="number" value=board.westPoints}} Festa: {{input type="number" value=board.festaPoints}}
+    	</label>
+      {{/each}}
+  </fieldset>  
+  <fieldset>
+    <input type="submit" value="Guardar">
+  </fieldset>  
+</form>
+    

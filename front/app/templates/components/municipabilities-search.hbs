@@ -1,0 +1,25 @@
+<h2 class="search-title">Buscar por persona, provincia o municipio</h2>
+<div class="search-form">
+	{{input type="text" value=query class="field" placeholder="Buscar"}}
+	<button class="search-clear" {{action 'clear'}} >
+		{{fa-icon "close"}}
+	</button>
+</div>
+<ul class="search-results">
+	{{#if loading}}
+	<div class="loading">
+		{{loading-spin color='#888' size=25 classNames="maps-loader"}}
+	</div>
+	{{else}}
+		{{#unless noResults}}
+			{{#each result in results}}
+				<li>{{partial result.type}}</li>
+			{{/each}}
+		{{else}}
+			<div class="no-content -groups">
+	          <h2>{{fa-icon "th-list"}}</h2>
+    	      <p>No hay resultados</p> <br>
+        	</div>
+		{{/unless}}
+	{{/if}}
+</ul>

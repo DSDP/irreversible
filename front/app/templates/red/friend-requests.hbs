@@ -1,0 +1,65 @@
+<section>
+  <div class="friend-container">
+
+  {{#if model.requestFriendsSend}}
+  <h1>Peticiones de amistad enviadas</h1>
+    <div class="friend-item">
+     
+        {{#each fr in model.requestFriendsSend}}
+          <div class="friend-img">
+            {{#if fr.request_to_user.avatar.url}}
+              <div class="img-container">
+                <img {{bind-attr src="fr.request_to_user.avatar.url"}}/>
+              </div>
+            {{/if}}
+          </div>
+          <div class="friend-name">
+            <p><b>{{fr.request_to_user.fullName}}</b><br> <i>{{fr.request_to_user.email}}</i></p>
+          </div>
+         
+          <div class="friend-actions">
+			      <a class="btn -white" {{action 'cancelRequest' fr}}>Cancelar peticion</a>
+          </div>
+        {{/each}}
+     
+    </div>
+  {{/if}}
+
+  {{#if model.requestFriendsRecibe}}
+  <h1>Peticiones recibidas</h1>
+    <div class="friend-item">
+        {{#each fr in model.requestFriendsRecibe}}
+            <div class="friend-img">
+              {{#if fr.user_request.avatar.url}}
+               <div class="img-container">
+                <img {{bind-attr src="fr.user_request.avatar.url"}}/>
+                </div>
+              {{/if}}
+            </div>
+
+            <div class="friend-name">
+              <p><b>{{fr.user_request.fullName}}</b><br> <i>{{fr.user_request.email}}</i></p>
+            </div>
+            
+            <div class="friend-actions">
+             <a class="btn" {{action 'approbe' fr}}>Aceptar peticion</a>
+             <a class="btn -white" {{action 'cancelRequest' fr}}>Desaprobar peticion</a>
+            </div>
+        {{/each}}
+     
+    </div>
+
+    {{else}}
+
+    <div class="no-content -friend-request">
+    <h2>{{fa-icon "user"}}</h2>
+    No tiene peticiones
+  </div>
+
+  {{/if}}
+  </div>
+</section>
+
+
+
+

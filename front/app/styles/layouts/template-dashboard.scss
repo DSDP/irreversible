@@ -1,0 +1,31 @@
+.dashboard {
+	@include clearfix;
+    @include display(flex);
+    @include justify-content(center);
+    @include align-items(stretch);
+    @include flex-wrap(wrap);
+    max-width: 800px;
+    margin: 0 auto;
+    clear: both;
+    text-align: center;
+	height: 100%;
+
+	.dash-item {
+		@include transition (all 0.2s ease-in-out);
+		@include flex(2 2 15em);
+		@include display(flex);
+		@include justify-content(center);
+		@include align-items(center);
+		background: #fff;
+		
+		box-shadow: inset 0 0 1px #ddd, 0 2px 4px darken(#ddd, 10%);
+		display: block;
+		margin: 0.4em;
+		padding: 2em 2em 3em 2em;
+		text-decoration: none;
+	}
+
+	h3 {
+		margin: 10px 0;
+	}
+}

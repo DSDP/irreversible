@@ -1,0 +1,73 @@
+<form {{action "save" on="submit"}} class="create-event">
+  <fieldset>
+    <label>
+      Lista
+      {{model-finder modelName='electoral-list' list=model.list labelPath="name" sigle=true}}
+    </label>
+  </fieldset> 
+  <fieldset>
+    <label>
+      Persona Fisica
+      {{model-finder modelName='person' list=model.person labelPath="name" sigle=true}}
+    </label>
+  </fieldset> 
+
+  <fieldset>
+    <label>
+      Partido Politico (EJ: Frente para la victoria)
+      {{model-finder modelName='political-party' list=model.politicalParty labelPath="name" sigle=true}}
+    </label>
+  </fieldset> 
+
+  <fieldset>
+    <label>
+      Espacio Politico (EJ: La Campora)
+      {{model-finder modelName='political-space' list=model.politicalSpace labelPath="name" sigle=true}}
+    </label>
+  </fieldset>  
+
+  <fieldset>
+    <label>
+      Comentario
+      {{input type="text" value=model.comment}}
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <label>
+      Orden
+      {{input type="text" value=model.order}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Cargo
+      {{model-finder modelName='charge' list=model.charge labelPath="name" sigle=true}}
+    </label>
+  </fieldset>          
+
+  <fieldset>
+    <label>
+      Provincia
+      {{model-finder modelName='province' list=model.province labelPath="name" sigle=true}}
+    </label>
+  </fieldset> 
+   <fieldset>
+    <label>
+      Seccion Electoral
+      {{model-finder modelName='electoral-section' filter=model.province list=model.electoralSection labelPath="name" sigle=true}}
+    </label>
+  </fieldset>  
+  <fieldset>
+    <label>
+      Municipio
+      {{model-finder modelName='town' list=model.town filter=model.electoralSection labelPath="name" sigle=true}}
+    </label>
+  </fieldset> 
+  
+  
+  <fieldset>
+    <input type="submit" value="Guardar">
+  </fieldset>
+</form>
+    

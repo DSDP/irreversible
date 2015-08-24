@@ -1,0 +1,49 @@
+<h1>Operadores</h1>
+
+<p>
+  {{link-to "Agregar" "data-entry.avales.aval-operators.new" }}
+</p>
+{{#if model.length}}
+  <table class="table-minimal">
+    <thead>
+      <tr>
+        <th>
+          Numero
+        </th>
+        <th>
+          Descripcion 
+        </th>
+        <th>
+          Avales Cargados
+        </th>
+        <th colspan="3">
+          Actiones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each operator in model}}
+        <tr>
+          <td>
+           	{{operator.number}}
+          </td>
+          <td>
+            {{operator.description}}
+          </td>
+          <td>
+            Hoy: {{operator.todayCharge}} (total: {{operator.totalCharge}})
+          </td>
+          <td>
+            {{link-to "Editar" "data-entry.avales.aval-operators.edit" operator}}
+            <a href="#" {{action "remove" operator}}>Eliminar</a>
+          </td>
+        </tr>
+      {{/each}}
+      {{infinity-loader infinityModel=model}}
+    </tbody>
+  </table>
+{{else}}
+  <p id="blankslate">
+    No Operadores found
+  </p>
+{{/if}}

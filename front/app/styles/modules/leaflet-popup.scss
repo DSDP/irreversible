@@ -1,0 +1,44 @@
+.leaflet-popup {
+	
+
+	.leaflet-popup-close-button {
+		margin: 10px;
+	}
+	
+	.leaflet-popup-content-wrapper {
+		width: 250px;
+	}
+
+	.leaflet-popup-content {
+
+		h4 {
+			margin: 5px 0 0 0;
+		}
+
+		p {
+			line-height: 26px;
+			margin: 10px 0;
+			border-bottom: 1px solid #ddd;
+		}
+
+		span {
+			  float: right;
+  			  font-weight: 600;
+		}
+
+		.completed {
+			color: rgb(0, 180, 225);
+			font-weight: 600;
+			border-bottom: none;
+
+			&:before {
+				content: "\f058";
+				font-family: FontAwesome;
+				position: absolute;
+				right: 18px;
+				color: rgb(0, 180, 225);
+			}
+		}
+	}
+
+}

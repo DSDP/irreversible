@@ -1,0 +1,44 @@
+
+<label>
+  Persona Fisica
+</label>
+{{#if person}}
+  <p>{{person.name}} {{person.lastName}} <a {{action 'deletePerson'}}>X</a></p>
+{{else}}
+   {{model-finder modelName='person' model-selected='selectedPerson'}}
+{{/if}}
+<label>
+  Partido politico
+</label>
+{{#if politicalParty}}
+  <p>{{politicalParty.name}} <a {{action 'deletePoliticalParty'}}>X</a></p>
+{{else}}
+   {{model-finder modelName='political-party' model-selected='selectedPoliticalParty'}}
+{{/if}}
+<label>
+  Provincia
+</label>
+{{#if province}}
+  <p>{{province.name}} <a {{action 'deleteProvince'}}>X</a></p>
+{{else}}
+   {{model-finder modelName='province' model-selected='selectedProvince'}}
+{{/if}}
+<label>
+  Municipio
+</label>
+{{#if town}}
+  <p>{{town.name}} <a {{action 'deleteTown'}}>X</a></p>
+{{else}}
+   {{model-finder modelName='town' model-selected='selectedTown'}}
+{{/if}}
+
+<label>
+  Eleccion
+</label>
+{{#if electoralElection}}
+  <p>{{electoralElection.name}} <a {{action 'deleteElectoralElection'}}>X</a></p>
+{{else}}
+   {{model-finder modelName='electoral-election' model-selected='selectedElectoralElection'}}
+{{/if}}
+
+<a {{action 'search'}}>Buscar</a>

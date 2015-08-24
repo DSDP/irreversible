@@ -1,0 +1,43 @@
+  {{#if model.length}}
+<section id="cd-timeline" class="cd-container -panel">
+
+    {{#each event in model}}
+      <div class="cd-timeline-block">
+
+    <div class="cd-timeline-img cd-picture">
+          {{#tool-tipster title="Agregar a favoritos" position="top"}} 
+            {{fa-icon "calendar"}}
+          {{/tool-tipster}}
+        </div> <!-- cd-timeline-img -->
+       
+        <div class="cd-timeline-content">
+           <span class="cd-date">{{time-format event.date 'LL'}}</span>
+          <h2> {{event.title}}</h2>
+          <p>
+          {{event.description}}
+         
+          </p>
+          <div class="cd-timeline-action">
+             <div class="action">
+              {{fa-icon "map-marker"}} 
+                <span>{{event.province.name}}</span>
+              </div>
+             <div class="action">
+              {{fa-icon "bank"}}
+                <span>{{event.town.name}}</span>
+              </div>
+          </div>
+                 
+        </div> <!-- cd-timeline-content -->
+      </div> <!-- cd-timeline-block -->
+    {{/each}}
+ 
+</section> <!-- cd-timeline -->
+ {{else}}
+       <div class="loading">
+        {{loading-bubbles color='#0083ff' size=100}}
+      </div>
+  {{/if}}
+
+
+

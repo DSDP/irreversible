@@ -1,0 +1,24 @@
+<section>
+
+<div class="page-header">
+  <h4>
+     Favoritos
+    </h4>
+</div>
+
+<div class="group-entries">
+  <div class="entry-list">
+  {{#if session.user.favorites.length}}
+    {{#each entry in session.user.favorites}}
+     {{poly-component entry.componentName entry.proprerties remove='remove' addFavorite='addFavorite' removeFavorite='removeFavorite' }}
+    {{/each}}
+  {{else}}
+  <p id="blankslate">
+    No se han encontrado entradas
+  </p>
+  {{/if}}
+  </div>
+</div>
+
+
+</section>

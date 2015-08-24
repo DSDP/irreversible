@@ -1,0 +1,8 @@
+<p>Agregar usuarios que pueden ver este muro</p>
+{{input type="text" value=query}}
+<ul>
+	{{#each user in queryContent}}
+		<li><a {{action 'add' user}}>{{user.fullName}} {{user.email}}</a></li>
+	{{/each}}
+</ul>
+{{yield}}

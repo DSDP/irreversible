@@ -1,0 +1,190 @@
+{{#ivy-tabs}}
+		{{#ivy-tab-list}}
+			{{#ivy-tab}}Elecciones{{/ivy-tab}}
+			{{#ivy-tab}}Detalle renovacion{{/ivy-tab}}
+		{{/ivy-tab-list}}
+
+
+		{{#ivy-tab-panel}}
+			{{#if model.elections}}
+				{{#each electoralElection in model.elections}}
+
+
+					{{#view 'municipabilities/electoral-elections/brief' model=electoralElection}}
+					<div class="election-list">
+						<div class="election-meta">
+							<h2>{{electoralElection.name}}</h2>
+							<span>
+								{{time-format electoralElection.date}} <small>- {{time-ago-in-words electoralElection.date}}</small>
+							</span>
+							<div class="election-stats">
+								<span class="stat">
+								{{#tool-tipster title="Cantidad de diputados que renuevan" position="top"}} 
+									 {{fa-icon "user"}} {{controllers.municipabilities.renovation.deputies.length}}
+								{{/tool-tipster}}
+								</span>
+								<span class="stat">
+								{{#tool-tipster title="Cantidad de senadores que renuevan" position="top"}} 
+									{{fa-icon "user"}} {{controllers.municipabilities.renovation.senators.length}}
+								{{/tool-tipster}}
+								</span>
+							</div>
+						</div>
+
+						<div class="electoral-province">
+						{{#each view.listsGrouped as |group|}}
+							<span class="stat">
+								({{group.electoralLists.length}})
+							</span>
+
+							{{#simple-accordion title=group.province.name}}
+							
+							<div class="electoral-container">
+								
+
+														
+								{{#each group.electoralLists as |electoralList|}}
+									<div class="electoral-election">
+									{{#view 'municipabilities/electoral-lists/brief' model=electoralList}}
+										<div class="electoral-name">
+											<h3>{{electoralList.name}}</h3>
+											<div class="meta">
+												{{#tool-tipster title="Personas que la componen" position="top"}} 
+												<span>{{fa-icon "person"}} {{electoralList.candidates.length}}</span>
+												{{/tool-tipster}}
+											</div>
+										</div>
+										{{#if view.politicalForceGraphicDataPie}}
+											<div class="chart-container">
+												{{ember-chart type='Pie' data=view.politicalForceGraphicDataPie width=200 height=200}}
+											</div>
+										{{/if}}
+										
+										<div id="destination"></div>
+
+										<div class="electoral-candidates">
+											{{#each view.candidatesGrouped as |group|}}
+												<div class="candidate-container">
+													
+													{{#ember-wormhole to="destination"}}
+														<div class="candidate-lenght">
+															<span>{{group.candidates.length}}</span>
+															{{group.charge.name}} {{group.charge.scope}}
+														</div>
+													{{/ember-wormhole}}
+													{{group.charge.name}} {{group.charge.scope}}
+													{{#sortable-group tagName="ul" onChange="reorderItems" as |gro|}}
+													  {{#each group.candidates as |candidate|}}
+													    {{#sortable-item tagName="li" model=candidate group=gro handle=".handle"}}
+													      {{candidate.order}} {{candidate.person.fullNameProperty}} {{candidate.comment}} {{candidate.politicalSpace.name}} {{candidate.province.name}}
+													      <span class="handle">&varr;</span>
+													    {{/sortable-item}}
+													  {{/each}}
+													{{/sortable-group}}
+												</div>
+											{{/each}}
+										</div>
+									{{/view}}
+									</div>
+								{{/each}}
+								
+							</div>	
+							{{/simple-accordion}}
+						{{/each}}
+
+						</div>	
+						
+
+											
+						
+						
+					
+						
+						{{#if electoralElection.enrolled}}
+							<div class="votes-poll">
+								{{#if electoralElection.enrolled}}
+									{{ember-chart type='Line' data=view.dataTest width=350 height=200}}
+								{{/if}}
+							</div>
+						{{/if}}
+						
+					</div>
+					{{/view}}
+				{{/each}}
+			{{/if}}
+		{{/ivy-tab-panel}}
+
+		{{#ivy-tab-panel}}
+			{{#if controllers.municipabilities.renovation}}
+
+				<div class="panel-renovation">
+					
+					{{#ivy-tabs}}
+						
+						{{#ivy-tab-list classNames="-stats-tab"}}
+							{{#ivy-tab}}
+								<span>{{controllers.municipabilities.renovation.deputies.length}}</span>
+								<p>Diputados</p>
+							{{/ivy-tab}}
+							{{#ivy-tab}}
+								<span>{{controllers.municipabilities.renovation.senators.length}}</span>
+								<p>Senadores</p>
+							{{/ivy-tab}}
+							
+						{{/ivy-tab-list}}
+						
+
+						{{#ivy-tab-panel}}
+							<div class="slat-list  -renovation">
+							{{#each deputie in controllers.municipabilities.renovation.deputies}}
+								<div class="slat-item">
+								    <div class="palet-color">
+              							{{{color-div deputie.politicalParty.color}}}
+              						</div> 	
+              						<div class="slat-content">
+	              						<div class="name">
+											<p>{{deputie.person.fullNameProperty}}</p>
+											<small>{{deputie.politicalParty.name}}</small>
+										</div>					
+										{{#if controllers.municipabilities.isExpandPanel}}
+										<div class="role">
+											<small>Asumió el {{time-format deputie.startDate}}</small> <br>
+											<small>Cumple su mandato {{time-ago-in-words deputie.endDate}}</small>
+					     				</div>
+					     				{{/if}}
+				     				</div>							
+								</div> 	
+							{{/each}}	
+							</div>	
+						{{/ivy-tab-panel}}	
+
+						{{#ivy-tab-panel}}
+							<div class="slat-list  -renovation">
+							{{#each senator in controllers.municipabilities.renovation.senators}}
+								<div class="slat-item">
+								    <div class="palet-color">
+              							{{{color-div senator.politicalParty.color}}}
+              						</div>
+              						<div class="slat-content">
+	              						<div class="name">
+											<p>{{senator.person.fullNameProperty}}</p>
+											<small>{{senator.politicalParty.name}}</small>
+										</div>					
+										{{#if controllers.municipabilities.isExpandPanel}}
+										<div class="role">
+											<small>Asumió el {{time-format senator.startDate}}</small> <br>
+											<small>Cumple su mandato {{time-ago-in-words senator.endDate}}</small>
+					     				</div>
+					     				{{/if}}
+				     				</div>		
+								</div> 	
+							{{/each}}				
+							</div>
+						{{/ivy-tab-panel}}
+
+							
+					{{/ivy-tabs}}			
+				</div>
+			{{/if}}	
+		{{/ivy-tab-panel}}
+	{{/ivy-tabs}}

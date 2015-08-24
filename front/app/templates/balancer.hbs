@@ -1,0 +1,83 @@
+<div class="data-avales" style="padding: 0;">
+
+	<form class="fix-to-nav upload-form" {{action "process" on="submit"}}>
+		<fieldset>
+			<div id="button-reset" class="btn-header">
+				<button class="btn" {{action 'reset'}}>Resetear</button>
+			</div>
+			<div id="input-file" class="btn-header">
+				{{fa-icon 'file-excel-o'}}
+				<input class="uploader btn" type="file" id="file">
+				<span class="btn-placeholder">Cargar excel</span>
+			</div>	
+			<div id="confirm-btn" class="btn-header">
+				{{fa-icon 'rocket'}}
+				<input class="input-submit btn" type="submit" value="Procesar">
+			</div>	
+		</fieldset>
+	</form>
+
+	<div class="balancer-container">
+		<div class="balancer-title" id="head">
+			<div class="first-title">
+				<h5>Distrito</h5>
+			</div>
+			{{#each linesName as |lineName|}}
+				<div class="line-title">
+					<h6>{{lineName.name}}</h6> 
+				</div>
+			{{/each}}
+			<div class="last-title">
+				<h6>
+					Total
+				</h6>
+			</div>
+		</div>
+		<div class="balancer-list">
+			{{#each sections as |section|}}
+				
+				 <div class="balancer-item -section">
+					<div class="first-title">
+						<h5>Sección {{section.electoralSection.shortName}}</h5>
+					</div>
+				
+					{{#each section.lineAvalCount as |lineStatus|}}
+						<div class="line-title">
+							<h6>{{lineStatus.entry}}</h6> 
+						</div>
+					{{/each}}
+
+					<div class="last-title">
+						<h6>
+							{{section.total}}
+						</h6>
+					</div>
+				</div>
+				
+				{{#simple-accordion title="section"}}
+				
+				{{#each section.townStatuses as |townStatus|}}		
+					<div class="balancer-item -town">
+						<div class="first-title">
+							<h5>{{townStatus.name}}</h5>
+							 <small>({{townStatus.need}} - {{townStatus.needDouble}})</small>
+						</div>
+
+						{{#each townStatus.lineStatuses as |lineStatus|}}
+							<div {{bind-attr class=":line-title lineStatus.valid:valid"}}>
+								<h6>{{lineStatus.entry}}</h6> 
+							</div> 
+						{{/each}}
+
+						<div class="last-title">
+							<h6>
+								{{townStatus.total}}
+							</h6>
+						</div>			
+					</div>
+				{{/each}}
+				{{/simple-accordion}}
+			{{/each}}
+		</div>
+	</div>
+</div>

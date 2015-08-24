@@ -1,0 +1,19 @@
+<div class="entry-item">
+	<figure class="entry-avatar">
+		{{#if entry.owner.avatar.url}}
+			<div class="img-container">
+				<img {{bind-attr src="entry.owner.avatar.url"}}/>
+			</div>
+			{{else}}
+			<div class="img-container -no-user">
+				<img src="/assets/images/no-user-img.jpg" />
+			</div>
+		{{/if}}
+	</figure>
+	<div class="entry-content">
+		{{partial 'red/entries/brief-header'}}
+		{{partial 'red/entries/brief-body'}}
+		{{partial 'red/entries/brief-footer'}}
+	</div>
+</div>
+

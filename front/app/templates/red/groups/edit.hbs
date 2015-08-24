@@ -1,0 +1,28 @@
+<div class="hero">
+		<div class="hero-inner">
+	    	<div class="hero-logo -profile">
+	    		{{#if avatar.url}}
+	   				<div class="img-container">
+	   					<img {{bind-attr src=avatar.url}}>
+	   				</div>
+	   				
+	    		{{/if}}
+	    		<div class="input-avatar">
+   				{{file-uploader file=avatar multiple=false}}
+   				</div>
+	    		
+			</div>
+		</div>
+	</div>
+
+<div class="section-header">
+    <h1>Editar grupo</h1>
+    {{link-to "Ver grupos" "red.groups.index" classNames="btn"}}
+  </div>
+
+<div class="section-content">
+{{partial "red/groups/form"}}
+
+
+
+</div>

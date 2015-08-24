@@ -1,0 +1,37 @@
+<form {{action "save" on="submit"}} class="create-event">
+  <fieldset>
+    <label>
+      Linea Numero
+      {{input type="text" value=model.lineNumber}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Numero de Operador
+      {{input type="text" value=model.operatorNumber}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Numero de Documento
+      {{input type="text" value=model.dni}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Nombre completo
+      {{input type="text" value=model.fullName}}
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      Sexo
+      {{input type="text" value=model.sex}}
+    </label>
+  </fieldset>
+  
+  <fieldset>
+    <input type="submit" value="Guardar">
+  </fieldset>  
+</form>
+    

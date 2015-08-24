@@ -1,0 +1,62 @@
+<h1>Avales</h1>
+<p>
+  {{link-to "Agregar" "data-entry.avales.avals.new" }}
+</p>
+
+{{#if model.length}}
+  <table class="table-minimal">
+    <thead>
+      <tr>
+        <th>
+          Linea
+        </th>
+        <th>
+          Operador
+        </th>
+        <th>
+          DNI
+        </th>    
+        <th>
+          Nombre
+        </th>
+        <th>
+          Sexo
+        </th> 
+
+        <th colspan="3">
+          Actiones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each aval in model}}
+        <tr>
+          <td>
+            {{aval.line.number}}
+          </td>  
+          <td>
+            {{aval.operator.number}}
+          </td>  
+          <td>
+            {{aval.dni}}
+          </td>
+          <td>
+            {{aval.fullName}}
+          </td>
+          <td>
+            {{aval.sex}}
+          </td>   
+          <td>
+            {{link-to "Editar" "data-entry.avales.avals.edit" aval}}
+            <a href="#" {{action "remove" aval}}>Eliminar</a>
+          </td>
+        </tr>
+      {{/each}}
+      {{infinity-loader infinityModel=model}}
+    </tbody>
+  </table>
+{{else}}
+  <p id="blankslate">
+    No aval found
+  </p>
+{{/if}}

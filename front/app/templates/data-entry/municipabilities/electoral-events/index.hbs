@@ -1,0 +1,45 @@
+   <table class="table-minimal">
+    <thead>
+      <tr>
+        <th>
+          <h3>Evento electoral</h3>
+        </th>
+         <th>
+          {{link-to "Crear evento" "data-entry.municipabilities.electoral-events.new" classNames="btn pull-right"}}
+        </th>
+      </tr>
+    </thead>
+      
+
+{{#if model.length}}
+    <tbody>
+        {{#each event in model}}
+        <tr>
+          <td>
+            {{event.title}}
+          </td>
+          <td>
+            {{event.description}}
+          </td>
+          <td>
+            {{time-format event.date 'l'}}
+          </td>
+          <td>
+            {{event.province.name}} {{event.town.name}}
+          </td>
+          <td>
+            {{link-to "Editar" "data-entry.municipabilities.electoral-events.edit" event}}
+          </td>
+          <td>
+            <a href="#" {{action "remove" event}}>Eliminar</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+{{else}}
+    <div class="loading">
+    {{loading-bubbles color='#0083ff' size=100}}
+  </div>
+{{/if}}
+</table>
+
